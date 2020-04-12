@@ -5,9 +5,11 @@ module Api
         def create
           begin
             service = CreatePhotobookService.new(
-              album_model: Album,
-              photobook_model: Photobook,
-              photobook_page_model: PhotobookPage
+              album_repository: AlbumRepository.new(album_model: Album),
+              photobook_repository: PhotobookRepository.new(
+                photobook_model: Photobook,
+                photobook_page_model: PhotobookPage
+              )
             )
             photobook = service.call(
               album_id: params[:album_id],

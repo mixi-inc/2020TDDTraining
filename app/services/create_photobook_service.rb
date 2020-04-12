@@ -8,10 +8,9 @@ class CreatePhotobookService
   SUBTITLE_MAX_LENGTH = 20
   COMMENT_MAX_LENGTH = 200
 
-  def initialize(album_model:, photobook_model:, photobook_page_model:)
-    @album = album_model
-    @photobook = photobook_model
-    @photobook_page = photobook_page_model
+  def initialize(album_repository:, photobook_repository:)
+    @album_repository = album_repository
+    @photobook_repository = photobook_repository
   end
 
   def call(
@@ -23,7 +22,7 @@ class CreatePhotobookService
     cover_media_taken_at:,
     photobook_pages:
   )
-    album = @album.find_by(id: album_id)
+    album = @album_repository.find_by(id: album_id)
     raise AlbumNotFoundError if album.nil?
 
     raise TitleTooLongError if title.present? && title.length > TITLE_MAX_LENGTH
@@ -41,24 +40,15 @@ class CreatePhotobookService
     end.join('・')
     subtitle = subtitle.length > SUBTITLE_MAX_LENGTH ? 'Family Album' : subtitle
 
-    photobook = @photobook.create(
+    photobook = @photobook_repository.create(
       album_id: album_id,
       account_id: account_id,
       cover_media_id: cover_media_id,
       cover_media_taken_at: cover_media_taken_at,
       title: title,
-      subtitle: subtitle
+      subtitle: subtitle,
+      photobook_pages: photobook_pages
     )
-
-    pages = photobook_pages.map do |new_page|
-      @photobook_page.new(
-        photobook_id: photobook.id,
-        page_number: new_page[:page_number],
-        media_id: new_page[:media_id],
-        comment: new_page[:comment]
-      )
-    end
-    @photobook_page.import(pages)
 
     photobook
   end
