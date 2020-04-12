@@ -50,15 +50,14 @@ class CreatePhotobookService
       subtitle: subtitle
     )
 
-    pages = photobook_pages.map do |new_page|
-      @photobook_page.new(
+    photobook_pages.map do |new_page|
+      @photobook_page.create(
         photobook_id: photobook.id,
         page_number: new_page[:page_number],
         media_id: new_page[:media_id],
         comment: new_page[:comment]
       )
     end
-    @photobook_page.import(pages)
 
     photobook
   end
