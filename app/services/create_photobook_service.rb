@@ -8,6 +8,12 @@ class CreatePhotobookService
   SUBTITLE_MAX_LENGTH = 20
   COMMENT_MAX_LENGTH = 200
 
+  def initialize(album_model:, photobook_model:, photobook_page_model:)
+    @album = album_model
+    @photobook = photobook_model
+    @photobook_page = photobook_page_model
+  end
+
   def call(
     album_id:,
     account_id:,
@@ -17,7 +23,7 @@ class CreatePhotobookService
     cover_media_taken_at:,
     photobook_pages:
   )
-    album = Album.find_by(id: album_id)
+    album = @album.find_by(id: album_id)
     raise AlbumNotFoundError if album.nil?
 
     raise TitleTooLongError if title.present? && title.length > TITLE_MAX_LENGTH
@@ -35,26 +41,24 @@ class CreatePhotobookService
     end.join('・')
     subtitle = subtitle.length > SUBTITLE_MAX_LENGTH ? 'Family Album' : subtitle
 
-    photobook = ActiveRecord::Base.transaction do
-      Photobook.create(
-        album_id: album_id,
-        account_id: account_id,
-        cover_media_id: cover_media_id,
-        cover_media_taken_at: cover_media_taken_at,
-        title: title,
-        subtitle: subtitle
-      )
-    end
+    photobook = @photobook.create(
+      album_id: album_id,
+      account_id: account_id,
+      cover_media_id: cover_media_id,
+      cover_media_taken_at: cover_media_taken_at,
+      title: title,
+      subtitle: subtitle
+    )
 
     pages = photobook_pages.map do |new_page|
-      PhotobookPage.new(
+      @photobook_page.new(
         photobook_id: photobook.id,
         page_number: new_page[:page_number],
         media_id: new_page[:media_id],
         comment: new_page[:comment]
       )
     end
-    PhotobookPage.import(pages)
+    @photobook_page.import(pages)
 
     photobook
   end
