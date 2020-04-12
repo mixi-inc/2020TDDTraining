@@ -4,7 +4,12 @@ module Api
       class PhotobooksController < ApplicationController
         def create
           begin
-            photobook = CreatePhotobookService.new.call(
+            service = CreatePhotobookService.new(
+              album_model: Album,
+              photobook_model: Photobook,
+              photobook_page_model: PhotobookPage
+            )
+            photobook = service.call(
               album_id: params[:album_id],
               account_id: params[:account_id],
               title: params[:title],
