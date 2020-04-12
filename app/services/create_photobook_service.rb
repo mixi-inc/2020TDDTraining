@@ -35,26 +35,23 @@ class CreatePhotobookService
     end.join('・')
     subtitle = subtitle.length > SUBTITLE_MAX_LENGTH ? 'Family Album' : subtitle
 
-    photobook = ActiveRecord::Base.transaction do
-      Photobook.create(
-        album_id: album_id,
-        account_id: account_id,
-        cover_media_id: cover_media_id,
-        cover_media_taken_at: cover_media_taken_at,
-        title: title,
-        subtitle: subtitle
-      )
-    end
+    photobook = Photobook.create(
+      album_id: album_id,
+      account_id: account_id,
+      cover_media_id: cover_media_id,
+      cover_media_taken_at: cover_media_taken_at,
+      title: title,
+      subtitle: subtitle
+    )
 
-    pages = photobook_pages.map do |new_page|
-      PhotobookPage.new(
+    photobook_pages.map do |new_page|
+      PhotobookPage.create(
         photobook_id: photobook.id,
         page_number: new_page[:page_number],
         media_id: new_page[:media_id],
         comment: new_page[:comment]
       )
     end
-    PhotobookPage.import(pages)
 
     photobook
   end
