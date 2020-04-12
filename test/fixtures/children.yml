@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: children
+#
+#  id         :bigint           not null, primary key
+#  birthday   :datetime         not null
+#  name       :string(255)      not null
+#  sex        :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  album_id   :bigint           not null
+#
+
+first:
+  album: first
+  birthday: 2019-01-01
+  name: 太郎
+  sex: 0
+
+second:
+  album: first
+  birthday: 2020-01-01
+  name: 次郎
+  sex: 0
+
+third:
+  album: second
+  birthday: 2020-01-01
+  name: 'abcdefghijklmnopqrstu'
+  sex: 0
