@@ -27,13 +27,13 @@ HTTPリクエスト/レスポンスの処理だけではなく、異常系のバ
 ```rb
 API: post '/:album_id/photobooks'
 Params:
-  requires :cover_media_id, type: String, desc: '表紙に使う medium の id'
-  requires :cover_media_taken_at, type: String, desc: '表紙に使う medium の taken_at'
+  requires :cover_media_id, type: String, desc: '表紙に使う media の id'
+  requires :cover_media_taken_at, type: String, desc: '表紙に使う media の taken_at'
   optional :title, type: String, desc: 'フォトブックのタイトル'
   optional :sub_title, type: String, desc: 'フォトブックのサブタイトル'
   requires :photobook_pages, type: Array do
     requires :page_no, type: Integer, desc: 'ページ番号'
-    requires :medium_uuid, type: String, desc: 'ページに入れる medium の uuid'
+    requires :medium_uuid, type: String, desc: 'ページに入れる media の uuid'
     optional :comment, type: String, desc: 'ページに入れるコメントの本文'
   end
 
@@ -60,7 +60,7 @@ Response:
 ```
 
 #### クラス図
-WIP
+<img src=https://user-images.githubusercontent.com/8536870/79121277-e2809000-7dcf-11ea-8764-8a8ede1d75db.png width=500>
 
 ### リファクタリングの方針
 #### 0. Controllerのテストを書く
