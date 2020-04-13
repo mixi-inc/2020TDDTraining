@@ -8,10 +8,9 @@
 ここでいう依存性は、 `Album` や `Photobook` などのModelクラスを指します
 (RailsのModelクラスはいわゆるORMで、DBへのアクセスを司ります)
 
-## Dependency Injectionとは？
-Dependency Injection(以下DI)という言葉を聞いたことがあるでしょうか
-
-その名の通り、依存性を外から渡すことを指します
+## Dependency Injection(DI)とは？
+DIという言葉を聞いたことがあるでしょうか
+これは、その名の通り依存性を外から注入することを指します
 
 例えば以下のメソッドを例にします
 
