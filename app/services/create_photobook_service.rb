@@ -8,6 +8,6 @@ class CreatePhotobookService
     cover_media_taken_at:,
     photobook_pages:
   )
-
+    # 作成した `Photobook` を返す
   end
 end
