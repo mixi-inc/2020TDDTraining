@@ -18,5 +18,5 @@ WORKDIR $APP_ROOT
 ADD ./Gemfile $APP_ROOT/Gemfile
 ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
 
-RUN bundle install
+RUN bundle install -j4
 ADD . $APP_ROOT
