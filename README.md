@@ -5,7 +5,7 @@
 
 それは、依存性を外から渡していないからです
 
-ここでいう依存性は、 `Album` や `Photobook` などのmodelクラスを指します
+ここでいう依存性は、 `Album` や `Photobook` などのModelクラスを指します
 (RailsのModelクラスはいわゆるORMで、DBへのアクセスを司ります)
 
 ## Dependency Injectionとは？
