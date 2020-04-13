@@ -10,7 +10,9 @@
 
 ## Dependency Injection(DI)とは？
 DIという言葉を聞いたことがあるでしょうか
+
 これは、その名の通り依存性を外から注入することを指します
+
 
 例えば以下のメソッドを例にします
 
@@ -22,7 +24,9 @@ end
 ```
 
 このメソッドは、内部でComponentAを初期化してメソッドコールしています
+
 これだと `callComponentA` が本当に `ComponentA#call` を呼び出しているかがテストできません
+
 
 なので、以下のようにメソッドの引数で外部から `ComponentA` を受け取れるようにします
 
@@ -61,6 +65,7 @@ assert mock.called # trueが返ればテストが通る
 
 ## 余談
 Railsであまりこういったことはしません
+
 基本的には [DBにテストデータを簡易に作成できる便利gem](https://github.com/thoughtbot/factory_bot) を使って良い感じにテストが書けてしまうからです...
 
 ## TODO
