@@ -16,6 +16,8 @@ services:
     volumes:
       - .:/app
       - bundle:/usr/local/bundle
+    tmpfs:
+      - /app/tmp
     ports:
       - "3000:3000"
     links:
