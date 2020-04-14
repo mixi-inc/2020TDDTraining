@@ -23,7 +23,7 @@ DDDの文脈では、 `Entity` は「一意性を担保する、ドメインロ�
 
 今回はすでに `Entity` は定義してあるので、 `AlbumRepository` と `PhotobookRepository` を `TDD` で実装してみましょう
 
-### TDDとは？
+## TDDとは？
 Test Driven Development
 
 ざっくりいうと、以下の手順を言います
