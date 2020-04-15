@@ -46,6 +46,12 @@ end
 ## テスト項目
 [photobooks_controller_test](https://github.com/mixi-inc/2020TDDTraining/blob/master/test/controllers/api/v1/albums/photobooks_controller_test.rb) のテストを参考に期待値は考えてください :pray:
 
+テストは以下のコマンドで実行できます
+
+```
+$ docker-compose run web rails test test/services/create_photobook_service_test.rb
+```
+
 ### 1. 正しいタイトル, サブタイトルのフォトブックが作成されること
 例えば、以下のような入力があった場合
 
