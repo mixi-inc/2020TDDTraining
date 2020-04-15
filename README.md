@@ -2,16 +2,18 @@
 これは、2020年設計・テスト新卒研修で取り扱うRailsのサンプルプロジェクトです
 
 ## 環境準備
-とりあえずdocker imageをbuildしてください
+初回はimageのbuildとDB createをしましょう
 
 ```
 $ docker-compose build
+$ docker-compose run web rails db:create
+$ docker-compose run web rails db:migrate
 ```
 
-buildできたら、以下のコマンド実行後、 localhost:3000 へアクセスしてみてRails Serverが起動しているか確認してみてください
+終わったら、以下のコマンド実行後、 localhost:3000 へアクセスしてみてRails Serverが起動しているか確認してみてください
 
 ```
-$ docker-compose run web rails s
+$ docker-compose up
 ```
 
 ## 概要
