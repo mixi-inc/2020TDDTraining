@@ -44,6 +44,8 @@ end
 この要領でモックをModelに対してそれぞれ作成し、イニシャライザ引数でServiceに渡していくわけです
 
 ## テスト項目
+[photobooks_controller_test](https://github.com/mixi-inc/2020TDDTraining/blob/master/test/controllers/api/v1/albums/photobooks_controller_test.rb) のテストを参考に期待値は考えてください :pray:
+
 ### 1. 正しいタイトル, サブタイトルのフォトブックが作成されること
 ### 2. フォーマットされたサブタイトルが文字数制限を超えていた場合、デフォルトのサブタイトルに指し替わっていること
 ### 3. パラメータで渡されるタイトルとサブタイトルがnilでなければ、そのタイトルとサブタイトルでフォトブックを作成すること
