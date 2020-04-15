@@ -260,23 +260,18 @@ class MockPhotobook
 end
 
 class MockPhotobookPage
-  attr_accessor :new_called_count, :import_called
+  attr_accessor :create_called_count
 
   def initialize
-    @new_called_count = 0
-    @import_called = false
+    @create_called_count = 0
   end
 
-  def new(
+  def create(
     photobook_id:,
     page_number:,
     media_id:,
     comment:
   )
-    @new_called_count += 1
-  end
-
-  def import(pages)
-    @import_called = true
+    @create_called_count += 1
   end
 end
