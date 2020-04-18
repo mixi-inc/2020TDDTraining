@@ -21,7 +21,7 @@ DDDの文脈では、 `Entity` は「一意性を担保する、ドメインロ�
 
 あまり深くは語りませんが、「IDを持っていて、そのオブジェクトに関係するロジックやバリデーションを持っている人」と思ってください
 
-今回はすでに `Entity` は定義してあるので、 `AlbumRepository` と `PhotobookRepository` を `TDD` で実装してみましょう
+今回はすでに [`Entity` は定義しておいた](https://github.com/mixi-inc/2020TDDTraining/tree/question-4/app/entities) ので、 `AlbumRepository` と `PhotobookRepository` を `TDD` で実装してみましょう
 
 ## TDDとは？
 Test Driven Development
@@ -32,6 +32,58 @@ Test Driven Development
 3. リファクタリングをして、テストが通らない状態と通る状態を素早く往復する
 
 よって、みなさんまずは落ちるテストを書いてください
+
+### 例えば
+`AlbumRepository` をTDDで作ることを考えてみましょう
+
+まずは落ちるテストを書くところから開始します
+
+```rb
+class AlbumRepositoryTest < ActiveSupport::TestCase
+  test 'AlbumRepository#find_by の返り値が AlbumEntity であること' do
+    repository = AlbumRepository.new(album_model: MockAlbum.new)
+    album = repository.find_by(id: 0)
+    assert(album.is_a?(AlbumEntity))
+  end
+end
+
+class MockAlbum
+end
+```
+
+この時点で一度テストを走らせましょう、当然テストは落ちますね
+
+次に、まずはこのテストが通るところを目指します
+
+Repositoryを以下のようにAlbumEntityを返すように実装してみます
+```rb
+class AlbumRepository
+  def initialize(album_model:)
+    @album = album_model
+  end
+
+  def find_by(id:)
+    AlbumEntity.new(id: 0, children: [])
+  end
+end
+```
+
+テストを走らせてみましょう、当然通りますね
+
+当然これで実装完了なわけではありません、テストケースを増やしてみて、実装が正しいことを確認していきます
+
+以下のテストケースを追加してみましょう
+```rb
+test 'AlbumRepository#find_by の返り値 AlbumEntity が期待するフィールドを持つこと' do
+  repository = AlbumRepository.new(album_model: MockAlbum.new)
+  album = repository.find_by(id: 0)
+  assert_equal(0, album.id)
+end
+```
+
+当然、テストは落ちますね
+
+このように、まずテストケースを書いてテストを落とす、次にとりあえずそのテストが通るように素早く実装する、テストが通っている状態を維持したまま実装を修正していく...ということをテストケースを増やしながら続けていくのがTDDになります
 
 ## テスト項目
 ### AlbumRepository
@@ -45,3 +97,6 @@ Test Driven Development
 ## TODO
 - [ ] AlbumRepositoryのテストを書く
 - [ ] PhotobookRepositoryのテストを書く
+
+## 答え
+https://github.com/mixi-inc/2020TDDTraining/compare/question-4...answer-4
