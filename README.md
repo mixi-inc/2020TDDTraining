@@ -44,8 +44,6 @@ end
 この要領でモックをModelに対してそれぞれ作成し、イニシャライザ引数でServiceに渡していくわけです
 
 ## テスト項目
-[photobooks_controller_test](https://github.com/mixi-inc/2020TDDTraining/blob/master/test/controllers/api/v1/albums/photobooks_controller_test.rb) のテストを参考に期待値は考えてください :pray:
-
 テストは以下のコマンドで実行できます
 
 ```
@@ -55,7 +53,6 @@ $ docker-compose run web rails test test/services/create_photobook_service_test.
 ### 1. 正しいタイトル, サブタイトルのフォトブックが作成されること
 例えば、以下のような入力があった場合
 
-input
 ```
 子供:
   1: { name: 太郎, birthday: 2019/01/01 }
@@ -63,7 +60,7 @@ input
 カバー写真の撮影日: 2020/04/01
 ```
 
-output
+出力は以下のようになります
 ```
 title: 2020年4月のアルバム
 subtitle: 太郎1歳3ヶ月・次郎0歳3ヶ月
@@ -73,10 +70,24 @@ subtitle: 太郎1歳3ヶ月・次郎0歳3ヶ月
 - デフォルトのサブタイトルは `Family Album` です
 - サブタイトルの長さの上限は `20` 文字です
 
-(子どもの名前の長さを長くしたり、子どもの数を増やせば文字数制限超えちゃいそう...)
-
 ### 3. パラメータで渡されるタイトルとサブタイトルがnilでなければ、そのタイトルとサブタイトルでフォトブックを作成すること
-### 4. フォトブックのカバー写真撮影日より子どもの誕生日が前の場合、サブタイトルに年齢を表示しないこと
+引数でtitleとsubtitleに任意の文字列を指定すると、返り値のPhotobookのtitleとsubtitleがその値と等しくなっていることを確認しましょう
+
+### 4. フォトブックのカバー写真撮影日より子どもの誕生日が後の場合、サブタイトルに年齢を表示しないこと
+例えば、以下のような入力があった場合
+
+```
+子供:
+  1: { name: 太郎, birthday: 2019/01/01 }
+  2: { name: 次郎, birthday: 2020/01/01 }
+カバー写真の撮影日: 2018/04/01
+```
+
+subtitleは以下のようになります
+```
+subtitle: 太郎・次郎
+```
+
 ### 5. 該当するアルバムが存在しない場合、 `AlbumNotFoundError` をraiseすること
 以下のassertメソッドでraiseはテストできます
 
@@ -86,9 +97,16 @@ assert_raise(CreatePhotobookService::AlbumNotFoundError) do
 end
 ```
 
+アルバムがnilになるようモックを作ります
+
 ### 6. 引数のタイトルの長さが上限を超えた場合、 `TitleTooLongError` をraiseすること
+タイトルの長さ上限20を超える文字列をtitle引数に渡してみましょう
+
 ### 7. 引数のサブタイトルの長さが上限を超えた場合、 `SubtitleTooLongError` をraiseすること
+サブタイトルの長さ上限20を超える文字列をsubtitle引数に渡してみましょう
+
 ### 8. 引数のフォトブックのコメントの長さが上限を超えた場合、 `CommentTooLongError` をraiseすること
+コメントの長さ上限200を超える文字列をcomment引数に渡してみましょう
 
 ## TODO
 - [ ] テスト項目1を実装
@@ -100,3 +118,5 @@ end
 - [ ] テスト項目7を実装
 - [ ] テスト項目8を実装
 
+## 答え
+https://github.com/mixi-inc/2020TDDTraining/compare/question-3...answer-3
