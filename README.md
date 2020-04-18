@@ -13,3 +13,6 @@
 - [ ] Controller側で作成したServiceクラスをcallする
 - [ ] Controller側でエラーハンドリングして、対応するレスポンスを返す
 - [ ] `docker-compose run web rails test test/controllers/api/v1/albums/photobooks_controller_test.rb` が通ることを確認
+
+## 答え
+https://github.com/mixi-inc/2020TDDTraining/compare/question-1...answer-1
