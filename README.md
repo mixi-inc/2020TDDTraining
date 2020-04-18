@@ -81,4 +81,4 @@ Railsで実はあまりこういったことはしません
 - [ ] `docker-compose run web rails test test/controllers/api/v1/albums/photobooks_controller_test.rb` が通ることを確認
 
 ## 答え
-https://github.com/mixi-inc/2020TDDTraining/compare/question-1...answer-1
+https://github.com/mixi-inc/2020TDDTraining/compare/question-2...answer-2
