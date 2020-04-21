@@ -1,5 +1,7 @@
 # 2020年設計・テスト新卒研修
-これは、2020年設計・テスト新卒研修で取り扱うRailsのサンプルプロジェクトです
+これは、2020年度株式会社ミクシィ の新卒研修 (設計・テスト編) で取り扱うRailsのサンプルプロジェクトです
+
+資料: https://speakerdeck.com/rockname/2020-design-test-mixi-training
 
 ## 環境準備
 初回はimageのbuildとDB createをしましょう
